@@ -15,15 +15,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Install packages
         run: dnf install -y lilypond bzip2 libxcrypt-compat util-linux
-      - name: Get Lilypond
-        uses: wei/wget@v1
-        with:
-          args: https://lilypond.org/download/binaries/linux-64/lilypond-2.22.2-1.linux-64.sh
       - name: Typeset score
         run: |
           su -
-          sh lilypond-2.22.2-1.linux-64.sh --prefix $(pwd)/official-binaries
-          official-binaries/bin/lilypond document.ly
-          official-binaries/bin/lilypond document.ly
+          lilypond document.ly
         env:
           RUNNER_ALLOW_RUNASROOT: 1
