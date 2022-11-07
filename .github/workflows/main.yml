@@ -19,6 +19,7 @@ jobs:
         run: |
           su -
           whereis lilypond
+          echo "/usr/bin/lilypond" >> $GITHUB_PATH
           lilypond document.ly
         env:
           RUNNER_ALLOW_RUNASROOT: 1
