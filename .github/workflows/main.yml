@@ -18,6 +18,7 @@ jobs:
       - name: Typeset score
         run: |
           su -
+          whereis lilypond
           lilypond document.ly
         env:
           RUNNER_ALLOW_RUNASROOT: 1
