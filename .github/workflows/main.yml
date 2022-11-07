@@ -6,16 +6,15 @@ on:
 jobs:
   typeset-document:
     name: Typeset document
-    runs-on: ubuntu-latest
+    runs-on: fcos
     container:
-      image: ubuntu:22.04
+      image: fedora:37
+      options: --user root
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install packages
-        run: |
-          apt-get -qy update
-          apt-get install -qy lilypond bzip2
+        run: dnf install -y lilypond bzip2 libxcrypt-compat
       - name: Get Lilypond
         uses: wei/wget@v1
         with:
