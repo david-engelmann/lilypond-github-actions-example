@@ -6,7 +6,7 @@ on:
 jobs:
   typeset-document:
     name: Typeset document
-    runs-on: fcos
+    runs-on: ubuntu-latest
     container:
       image: fedora:37
       options: --user root
@@ -23,4 +23,3 @@ jobs:
         run: |
           sh lilypond-2.22.2-1.linux-64.sh --prefix $(pwd)/official-binaries
           official-binaries/bin/lilypond document.ly
-          lilypond document.ly
