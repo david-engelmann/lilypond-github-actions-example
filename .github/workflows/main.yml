@@ -8,15 +8,20 @@ jobs:
     name: Typeset document
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:latest
+      image: ubuntu:22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install packages
+        run: |
+          apt-get -qy update
+          apt-get install -qy lilypond bzip2
       - name: Get Lilypond
         uses: wei/wget@v1
         with:
-          args: https://gitlab.com/api/v4/projects/lilypond%2Flilypond/packages/generic/lilypond/2.23.80/lilypond-2.23.80-linux-x86_64.tar.gz
+          args: https://lilypond.org/download/binaries/linux-64/lilypond-2.22.2-1.linux-64.sh
       - name: Typeset score
         run: |
-          tar -zxvf lilypond-2.23.80-linux-x86_64.tar.gz
-          lilypond-2.23.80/bin/lilypond document.ly
+          sh lilypond-2.22.2-1.linux-64.sh --prefix $(pwd)/official-binaries
+          official-binaries/bin/lilypond document.ly
+          lilypond document.ly
