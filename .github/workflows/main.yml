@@ -6,10 +6,10 @@ on:
 jobs:
   typeset-document:
     name: Typeset document
-    runs-on: fcos
+    runs-on: ubuntu-latest
     container:
       image: fedora:37
-      options: --user root
+      options: --user root --security-opt seccomp=unconfined
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
