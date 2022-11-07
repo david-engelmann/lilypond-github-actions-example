@@ -21,7 +21,7 @@ jobs:
           args: https://lilypond.org/download/binaries/linux-64/lilypond-2.22.2-1.linux-64.sh
       - name: Typeset score
         run: |
-          sudo su
+          su -
           sh lilypond-2.22.2-1.linux-64.sh --prefix $(pwd)/official-binaries
           official-binaries/bin/lilypond document.ly
           lilypond document.ly
