@@ -3,8 +3,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-env:
-  DEBIAN_FRONTEND: noninteractive
 jobs:
   typeset-document:
     name: Typeset document
@@ -14,10 +12,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install Lilypond
-        run: |
-          set -e
-          apt-get -qy update
-          apt-get -qy install --no-install-recommends lilypond
+      - name: Get Lilypond
+        uses: wei/wget@v1
+        with:
+          args: https://gitlab.com/api/v4/projects/lilypond%2Flilypond/packages/generic/lilypond/2.23.80/lilypond-2.23.80-linux-x86_64.tar.gz
       - name: Typeset score
-        run: lilypond document.ly
+        run: |
+          tar -zxvf lilypond-2.23.80-linux-x86_64.tar.gz
+          lilypond-2.23.80/bin/lilypond document.ly
