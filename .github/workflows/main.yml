@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fedora:37
-      options: --user root
+      options: --user root --security-opt seccomp=unconfined
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
         run: |
           su -
           whereis lilypond
-          echo "/usr/bin/lilypond/bin" >> $GITHUB_PATH
+          echo "/usr/bin/lilypond" >> $GITHUB_PATH
           lilypond document.ly
         env:
           RUNNER_ALLOW_RUNASROOT: 1
