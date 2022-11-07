@@ -8,7 +8,7 @@ jobs:
     name: Typeset document
     runs-on: fcos
     container:
-      image: fedora:37
+      image: fedora:36
       options: --user root
     steps:
       - name: Checkout repository
